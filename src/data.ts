@@ -12,7 +12,7 @@ type Products = Product[];
 export const featuredProducts: Products = [
   {
     id: 1,
-    title: "Sicilya",
+    title: "SİCİLYA",
     desc: "Her lokmada baharatlı pepperoni, jalapeño, kırmızı pul biber ve erimiş mozzarella peyniriyle ateşli bir tat patlaması yaşayın.",
     img: "/temporary/p1.png",
     price: 24.9,
@@ -204,7 +204,7 @@ export const featuredProducts: Products = [
 export const pizzas: Products = [
   {
     id: 1,
-    title: "Sicilya",
+    title: "SİCİLYA",
     desc: "Her lokmada baharatlı pepperoni, jalapeño, kırmızı pul biber ve erimiş mozzarella peyniriyle ateşli bir tat patlaması yaşayın.",
     img: "/temporary/p1.png",
     price: 24.9,
@@ -225,7 +225,7 @@ export const pizzas: Products = [
   },
   {
     id: 2,
-    title: "Akdeniz Lezzeti",
+    title: "AKDENİZ LEZZETİ",
     desc: "Akdeniz esintili bu yaratımla, zesty feta peyniri, Kalamata zeytinleri, kurutulmuş domatesler ve kekikle damağınızı şenlendirin.",
     img: "/temporary/p8.png",
     price: 32.9,
@@ -309,7 +309,7 @@ export const pizzas: Products = [
   },
   {
     id: 6,
-    title: "Dört Peynir Fantazisi",
+    title: "DÖRT PEYNİR FANTEZİSİ",
     desc: "Mozzarella, cheddar, provolone ve Parmesan peynirlerinin erimiş karışımıyla saf peynirli bir mutluluk deneyimi yaşayın, zengin ve tatmin edici bir pizza deneyimi sunar.",
     img: "/temporary/p12.png",
     price: 22.9,
@@ -331,10 +331,10 @@ export const pizzas: Products = [
 ];
 export const singleProduct: Product = {
   id: 1,
-  title: "Sicilya",
-  desc: "Her lokmada baharatlı pepperoni, jalapeño, kırmızı pul biber ve erimiş mozzarella peyniriyle ateşli bir tat patlaması yaşayın.",
-  img: "/temporary/p1.png",
-  price: 24.9,
+  title: "DÖRT PEYNİR FANTEZİSİ",
+  desc: "Mozzarella, cheddar, provolone ve Parmesan peynirlerinin erimiş karışımıyla saf peynirli bir mutluluk deneyimi yaşayın, zengin ve tatmin edici bir pizza deneyimi sunar.",
+  img: "/temporary/p12.png",
+  price: 22.9,
   options: [
     {
       title: "Küçük",
@@ -364,7 +364,7 @@ export const menu: Menu = [
   {
     id: 1,
     slug: "pastas",
-    title: "İtalyan Makarna",
+    title: "İTALYAN MAKARNA",
     desc: "Efsanevi İtalyan el yapımı makarna menümüzle mükemmelin tadını çıkarın.",
     img: "/temporary/m1.png",
     color: "white",
@@ -372,7 +372,7 @@ export const menu: Menu = [
   {
     id: 2,
     slug: "burgers",
-    title: "Sulu Hamburgerler",
+    title: "SULU HAMBURGER",
     desc: "Burger Cenneti: Sulu et köfteleri, cesur tatlar ve bol garnitürlerle dolu.",
     img: "/temporary/m2.png",
     color: "black",
@@ -380,7 +380,7 @@ export const menu: Menu = [
   {
     id: 3,
     slug: "pizzas",
-    title: "Peynirli Pizzalar",
+    title: "PEYNİRLİ PİZZA",
     desc: "Pizza Cenneti: Dayanılmaz dilimler, ağzınızı sulandıran garnitürler ve peynirli mükemmellik.",
     img: "/temporary/m3.png",
     color: "white",

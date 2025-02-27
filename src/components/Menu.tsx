@@ -8,7 +8,6 @@ import CartIcon from "./CartIcon";
 const links = [
   { id: 1, title: "Anasayfa", url: "/" },
   { id: 2, title: "Menü", url: "/menu" },
-  { id: 3, title: "CALIŞMA SAATLERİ ", url: "/" },
   { id: 4, title: "İLETİŞİM", url: "/contact" },
 ];
 
