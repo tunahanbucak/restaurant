@@ -11,6 +11,7 @@ const getData = async () => {
   }
   return res.json();
 };
+
 const MenuPage = async () => {
   const menu: MenuType = await getData();
   return (

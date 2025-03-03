@@ -23,6 +23,7 @@ type Props = {
 };
 
 const CategoryPage = async ({ params }: Props) => {
+  const { category } = params;
   const products: ProductType[] = await getData(params.category);
 
   return (

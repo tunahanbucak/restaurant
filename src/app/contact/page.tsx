@@ -13,15 +13,15 @@ const ContactPage = () => {
       <div className="mt-12 grid md:grid-cols-2 gap-10 w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
         <div className="space-y-6">
           <div className="flex items-center space-x-4">
-            <Phone className="text-blue-600" />
+            <Phone className="text-red-600" />
             <p className="text-lg text-gray-700">+90 555 123 45 67</p>
           </div>
           <div className="flex items-center space-x-4">
-            <Mail className="text-blue-600" />
+            <Mail className="text-red-600" />
             <p className="text-lg text-gray-700">info@massimo.com</p>
           </div>
           <div className="flex items-center space-x-4">
-            <MapPin className="text-blue-600" />
+            <MapPin className="text-red-600" />
             <p className="text-lg text-gray-700">İstanbul, Türkiye</p>
           </div>
         </div>
@@ -31,7 +31,7 @@ const ContactPage = () => {
             <input
               type="text"
               placeholder="Adınızı girin"
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
               required
             />
           </div>
@@ -40,7 +40,7 @@ const ContactPage = () => {
             <input
               type="email"
               placeholder="E-posta adresiniz"
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
               required
             />
           </div>
@@ -49,13 +49,13 @@ const ContactPage = () => {
             <textarea
               rows={4}
               placeholder="Mesajınızı yazın..."
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
               required
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+            className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-700 transition"
           >
             Gönder
           </button>

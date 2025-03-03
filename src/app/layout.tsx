@@ -5,6 +5,9 @@ import Notification from "@/components/Notification";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AuthProvider from "@/components/AuthProvider";
+import QueryProvider from "@/components/QueryProvider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,12 +35,19 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-          <div>
-            <Notification />
-            <Navbar />
-            {children}
-            <Footer />
-          </div>
+          <QueryProvider>
+            <div>
+              <Notification />
+              <Navbar />
+              {children}
+              <Footer />
+              <ToastContainer
+                position="bottom-right"
+                theme="dark"
+                autoClose={3000}
+              />
+            </div>
+          </QueryProvider>
         </AuthProvider>
       </body>
     </html>
