@@ -1,5 +1,6 @@
 import { ProductType } from "@/types/types";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const getData = async () => {
@@ -33,9 +34,11 @@ const Featured = async () => {
               </h1>
               <p className="p-4 2xl:p-8">{item.desc}</p>
               <span className="text-xl font-bold">{item.price}₺</span>
-              <button className="bg-red-500 text-white p-2 rounded-md">
-                Sepete Ekle
-              </button>
+              <Link href={`http://localhost:3000/menu/${item.catSlug}`}>
+                <button className="bg-red-500 text-white p-2 rounded-md">
+                  Sepete Ekle
+                </button>
+              </Link>
             </div>
           </div>
         ))}

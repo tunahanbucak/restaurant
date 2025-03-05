@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import Image from "next/image";
 
 type Inputs = {
   title: string;
@@ -18,7 +19,6 @@ type Option = {
 
 const AddPage = () => {
   const { data: session, status } = useSession();
-  const router = useRouter();
 
   const [inputs, setInputs] = useState<Inputs>({
     title: "",
@@ -33,88 +33,93 @@ const AddPage = () => {
   });
 
   const [options, setOptions] = useState<Option[]>([]);
-  const [file, setFile] = useState<File | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [file, setFile] = useState<File>();
+  const router = useRouter();
 
   if (status === "loading") return <p>Yükleniyor...</p>;
 
   if (status === "unauthenticated" || !session?.user.isAdmin) {
     router.push("/");
-    return null;
   }
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
   };
 
-  const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOption((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const changeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOption((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
   };
+  //   const target = e.target as HTMLInputElement;
+  //   if (target.files && target.files.length > 0) {
+  //     setFile(target.files[0]);
+  //   }
+  // };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // const uploadImage = async () => {
+  //   const data = new FormData();
+  //   data.append("file", file!);
+  //   data.append("upload_preset", "restaurant");
+
+  //   const res = await fetch(
+  //     "https://api.cloudinary.com/v1_1/drw5srglqe/image",
+  //     {
+  //       method: "POST",
+  //       body: data,
+  //     }
+  //   );
+  //   const resData = await res.json();
+  //   return resData.url;
+  // };
+
+  const handleChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
-    if (target.files && target.files.length > 0) {
-      setFile(target.files[0]);
-    }
+    const item = (target.files as FileList)[0];
+    setFile(item);
   };
 
-  const uploadImage = async () => {
-    if (!file) {
-      setError("Lütfen bir resim yükleyin.");
-      return null;
-    }
-
+  const upload = async () => {
     const data = new FormData();
-    data.append("file", file);
+    data.append("file", file!);
     data.append("upload_preset", "restaurant");
 
-    try {
-      const res = await fetch(
-        "https://api.cloudinary.com/v1_1/lamadev/image/upload",
-        {
-          method: "POST",
-          body: data,
-        }
-      );
-
-      if (!res.ok) {
-        throw new Error("Resim yükleme hatası");
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/drw5srglqe/image/upload",
+      {
+        method: "POST",
+        body: data,
       }
+    );
 
-      const resData = await res.json();
-      return resData.url;
-    } catch (err) {
-      console.log(err);
-      setError("Resim yüklenirken hata oluştu.");
-      return null;
-    }
+    const resData = await res.json();
+    return resData.url;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(null);
-
-    const imageUrl = await uploadImage();
-    if (!imageUrl) return;
-
     try {
-      const res = await fetch("/api/products", {
+      const url = await upload();
+      const res = await fetch("http://localhost:3000/api/products", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ img: imageUrl, ...inputs, options }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          img: url,
+          ...inputs,
+          options,
+        }),
       });
-
-      if (!res.ok) {
-        throw new Error("Ürün eklenirken hata oluştu");
-      }
 
       const data = await res.json();
       router.push(`/product/${data.id}`);
     } catch (err) {
       console.log(err);
-      setError("Ürün eklenirken hata oluştu.");
     }
   };
 
@@ -125,13 +130,20 @@ const AddPage = () => {
         className="flex flex-col gap-4 bg-white p-6 rounded-lg shadow-lg"
       >
         <h1 className="text-2xl font-semibold text-gray-800">Yeni Ürün Ekle</h1>
-        {error && <p className="text-red-500">{error}</p>}
-        <label className="text-sm font-medium text-gray-600">Resim Yükle</label>
-        <input
-          type="file"
-          onChange={handleFileChange}
-          className="border p-2 rounded"
-        />
+        <div className="w-full flex felex-col gap-2">
+          <label
+            className="text-sm cursor-pointer flex gap-4 items-center"
+            htmlFor="file"
+          >
+            <Image src="/upload.png" alt="" width={30} height={20} />
+            <span> Resim Yükle</span>
+            <input
+              type="file"
+              onChange={handleChangeImg}
+              className="border p-2 rounded"
+            />
+          </label>
+        </div>
         <label className="text-sm font-medium text-gray-600">Başlık</label>
         <input
           type="text"
@@ -168,14 +180,14 @@ const AddPage = () => {
             type="text"
             name="title"
             placeholder="Başlık"
-            onChange={handleOptionChange}
+            onChange={changeOption}
             className="border p-2 rounded flex-1"
           />
           <input
             type="number"
             name="additionalPrice"
             placeholder="Ekstra Fiyat"
-            onChange={handleOptionChange}
+            onChange={changeOption}
             className="border p-2 rounded flex-1"
           />
           <button
@@ -187,10 +199,19 @@ const AddPage = () => {
           </button>
         </div>
         <div className="flex flex-wrap gap-2">
-          {options.map((opt, index) => (
-            <span key={index} className="bg-gray-200 px-2 py-1 rounded text-sm">
-              {opt.title} (+{opt.additionalPrice}₺)
-            </span>
+          {options.map((opt) => (
+            <div
+              key={opt.title}
+              className="p-2  rounded-md cursor-pointer bg-gray-200 text-gray-400"
+              onClick={() =>
+                setOptions((prev) =>
+                  prev.filter((item) => item.title !== opt.title)
+                )
+              }
+            >
+              <span>{opt.title}</span>
+              <span className="text-xs"> (+ ${opt.additionalPrice})</span>
+            </div>
           ))}
         </div>
         <button type="submit" className="bg-green-500 text-white py-2 rounded">

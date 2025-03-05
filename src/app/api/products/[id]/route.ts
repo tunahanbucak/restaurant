@@ -2,6 +2,7 @@ import { getAuthSession } from "@/utils/auth";
 import { prisma } from "@/utils/connect";
 import { NextRequest, NextResponse } from "next/server";
 
+// GET SINGLE PRODUCT
 export const GET = async (
   req: NextRequest,
   { params }: { params: { id: string } }
@@ -14,9 +15,10 @@ export const GET = async (
         id: id,
       },
     });
+
     return new NextResponse(JSON.stringify(product), { status: 200 });
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
     return new NextResponse(
       JSON.stringify({ message: "Something went wrong!" }),
       { status: 500 }
@@ -24,6 +26,7 @@ export const GET = async (
   }
 };
 
+// DELETE SINGLE PRODUCT
 export const DELETE = async (
   req: NextRequest,
   { params }: { params: { id: string } }
@@ -38,11 +41,12 @@ export const DELETE = async (
           id: id,
         },
       });
-      return new NextResponse(JSON.stringify("Product has been deleted"), {
+
+      return new NextResponse(JSON.stringify("Product has been deleted!"), {
         status: 200,
       });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
       return new NextResponse(
         JSON.stringify({ message: "Something went wrong!" }),
         { status: 500 }

@@ -1,6 +1,17 @@
+"use client";
+
 import { Mail, MapPin, Phone } from "lucide-react";
+import { toast } from "react-toastify";
 
 const ContactPage = () => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    toast.success("Mesajınız başarılı şekilde iletilmiştir!");
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  };
   return (
     <div className="min-h-screen flex flex-col items-center p-6 lg:p-20 bg-gray-100">
       <h1 className="text-4xl font-bold text-center text-gray-800">
@@ -56,6 +67,7 @@ const ContactPage = () => {
           <button
             type="submit"
             className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-700 transition"
+            onClick={handleClick}
           >
             Gönder
           </button>

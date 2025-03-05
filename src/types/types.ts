@@ -13,6 +13,7 @@ export type ProductType = {
   desc?: string;
   price: number;
   img?: string;
+  catSlug: string;
   options?: { title: string; additionalPrice: number }[];
 };
 

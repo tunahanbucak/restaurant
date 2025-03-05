@@ -7,14 +7,14 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 declare module "next-auth" {
   interface Session {
     user: User & {
-      isAdmin: Boolean;
+      isAdmin: boolean;
     };
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
-    isAdmin: Boolean;
+    isAdmin: boolean;
   }
 }
 
@@ -48,7 +48,7 @@ export const authOptions: NextAuthOptions = {
           email: token.email!,
         },
       });
-      token.isAdmin = userInDb?.isAdmin!;
+      token.isAdmin = userInDb!.isAdmin!;
       return token;
     },
   },

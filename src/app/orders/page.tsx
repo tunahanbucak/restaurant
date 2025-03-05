@@ -18,7 +18,7 @@ const OrdersPage = () => {
     }
   }, [status, router]);
 
-  const { isLoading, data, error } = useQuery<OrderType[]>({
+  const { isLoading, data } = useQuery<OrderType[]>({
     queryKey: ["orders"],
     queryFn: async () => {
       const res = await fetch("http://localhost:3000/api/orders");
