@@ -19,19 +19,16 @@ type Option = {
 
 const AddPage = () => {
   const { data: session, status } = useSession();
-
   const [inputs, setInputs] = useState<Inputs>({
     title: "",
     desc: "",
     price: 0,
     catSlug: "",
   });
-
   const [option, setOption] = useState<Option>({
     title: "",
     additionalPrice: 0,
   });
-
   const [options, setOptions] = useState<Option[]>([]);
   const [file, setFile] = useState<File>();
   const router = useRouter();
@@ -210,7 +207,7 @@ const AddPage = () => {
               }
             >
               <span>{opt.title}</span>
-              <span className="text-xs"> (+ ${opt.additionalPrice})</span>
+              <span className="text-xs"> (+ {opt.additionalPrice} ₺)</span>
             </div>
           ))}
         </div>

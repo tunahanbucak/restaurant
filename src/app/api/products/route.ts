@@ -23,12 +23,6 @@ export const GET = async (req: NextRequest) => {
 export const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();
-    if (!body || Object.keys(body).length === 0) {
-      return new NextResponse(
-        JSON.stringify({ message: "Invalid request body!" }),
-        { status: 400 }
-      );
-    }
     const product = await prisma.product.create({
       data: body,
     });

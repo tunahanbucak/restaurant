@@ -7,7 +7,6 @@ const ContactPage = () => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     toast.success("Mesajınız başarılı şekilde iletilmiştir!");
-
     setTimeout(() => {
       window.location.reload();
     }, 2000);

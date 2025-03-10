@@ -1,11 +1,12 @@
 import { prisma } from "@/utils/connect";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+
 import Stripe from "stripe";
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 export async function POST(
-  request: NextRequest,
+  request: Request,
   { params }: { params: Promise<{ orderId: string }> }
 ) {
   const { orderId } = await params;

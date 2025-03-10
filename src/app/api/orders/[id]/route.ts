@@ -1,14 +1,14 @@
 import { prisma } from "@/utils/connect";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export const PUT = async (
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) => {
-  const { id } = params;
+export async function PUT(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
 
   try {
-    const body = await req.json();
+    const body = await request.json();
 
     await prisma.order.update({
       where: {
@@ -20,11 +20,11 @@ export const PUT = async (
       JSON.stringify({ message: "Order has been updated!" }),
       { status: 200 }
     );
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
     return new NextResponse(
       JSON.stringify({ message: "Something went wrong!" }),
       { status: 500 }
     );
   }
-};
+}

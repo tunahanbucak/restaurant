@@ -57,7 +57,7 @@ const LoginPage = () => {
           </button>
           <p className="text-sm">
             Bir sorun mu var?
-            <Link className="underline" href="/">
+            <Link className="underline" href="/contact">
               {" "}
               Bizimle iletişime geçin
             </Link>

@@ -19,10 +19,6 @@ const Navbar = () => {
         <Menu />
       </div>
       <div className="hidden md:flex gap-4 items-center justify-end flex-1 ">
-        {/* <div className="flex items-center gap-2 cursor-pointer bg-red-300 px-1 rounded-md md:absolute top-3 r-2 lg:static">
-          <Image src="/phone.png" alt="Phone" width={20} height={20} />
-          <span>0 (212) 123 45 67</span>
-        </div> */}
         <UserLinks />
         <CartIcon />
       </div>
